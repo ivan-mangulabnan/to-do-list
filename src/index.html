@@ -6,6 +6,62 @@
     <title>Due-Ties</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Due-ties</h1>
+        <nav>
+            <p>Projects</p>
+        </nav>
+    </header>
+    <div class="content">
+    </div>
+    <button id="show-form-btn">+</button>
+    <dialog id="form-dialog">
+        <form class="task-form">
+            <button id="close-button" type="button">Close</button>
+            <div class="project-container">
+                <label for="project">Project</label>
+                <select id="project">
+                </select>
+                <button type="button">+</button>
+            </div>
+
+            <div class="title-container">
+                <label for="title">Title</label>
+                <input id="title" type="text">
+            </div>
+
+            <div class="description-container">
+                <label for="description">Description</label>
+                <textarea id="description"></textarea>
+            </div>
+
+            <div class="dueDate-container">
+                <label for="dueDate">Due Date</label>
+                <input id="dueDate" type="date">
+            </div>
+
+            <div class="priority-container">
+                <label for="priority">Priority</label>
+                <select id="priority">
+                </select>
+            </div>
+
+            <div class="notes-container">
+                <label for="notes">Notes</label>
+                <textarea id="notes"></textarea>
+            </div>
+
+            <div class="checklist-container">
+                <span>Checklist</span>
+                <button id="checklist-button" type="button">+</button>
+            </div>
+
+            <div class="completion-container">
+                <label for="completionStatus">Completion Status</label>
+                <input id="completionStatus" type="checkbox">
+            </div>
+            <button id="create-button" type="button">Create Task</button>
+        </form>
+    </dialog>
 </body>
 </html>

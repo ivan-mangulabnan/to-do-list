@@ -1,0 +1,73 @@
+body {
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    width: 20rem;
+    height: 100vh;
+    border: 3px solid var(--color-borders);
+    position: fixed;
+}
+
+.content {
+    padding-left: 20rem;
+}
+
+#show-form-btn {
+    position: fixed;
+    font-size: 2rem;
+    font-weight: bold;
+    bottom: 5rem;
+    right: 5rem;
+    height: 4rem;
+    width: 5rem;
+    border-radius: 15%;
+    background-color: var(--color-primary-red);
+    border: 2px solid var(--color-borders);
+    color: var(--color-background);
+    cursor: pointer;
+}
+
+#show-form-btn:active {
+    background-color: var(--color-hover);
+}
+
+#show-form-btn:hover {
+    box-shadow: .1rem .1rem .1rem var(--color-borders);
+}
+
+#show-form-btn:focus {
+    outline: none;
+}
+
+#form-dialog {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
+
+.no-task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-borders);
+    font-family: var(--font-lato);
+}
+
+.home {
+    display: grid;
+    grid-auto-rows: auto;
+    gap: .5rem;
+}
+
+.project-name {
+    font-size: 3rem;
+    font-family: "Poppins";
+    font-weight: bold;
+    color: var(--color-font);
+    background-color: var(--color-borders);
+}
