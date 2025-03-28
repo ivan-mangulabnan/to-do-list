@@ -12,55 +12,54 @@
             <p>Projects</p>
         </nav>
     </header>
-    <div class="content">
+    <div id="content">
     </div>
     <button id="show-form-btn">+</button>
     <dialog id="form-dialog">
-        <form class="task-form">
+        <form id="task-form">
             <button id="close-button" type="button">Close</button>
-            <div class="project-container">
+            <div id="project-container">
                 <label for="project">Project</label>
-                <select id="project">
-                </select>
+                <select id="project"></select>
                 <button type="button">+</button>
             </div>
 
-            <div class="title-container">
+            <div id="title-container">
                 <label for="title">Title</label>
-                <input id="title" type="text">
+                <input id="title" type="text" required>
             </div>
 
-            <div class="description-container">
+            <div id="description-container">
                 <label for="description">Description</label>
                 <textarea id="description"></textarea>
             </div>
 
-            <div class="dueDate-container">
+            <div id="dueDate-container">
                 <label for="dueDate">Due Date</label>
-                <input id="dueDate" type="date">
+                <input id="dueDate" type="date" required>
             </div>
 
-            <div class="priority-container">
+            <div id="priority-container">
                 <label for="priority">Priority</label>
                 <select id="priority">
                 </select>
             </div>
 
-            <div class="notes-container">
+            <div id="notes-container">
                 <label for="notes">Notes</label>
                 <textarea id="notes"></textarea>
             </div>
 
-            <div class="checklist-container">
+            <div id="checklist-container">
                 <span>Checklist</span>
                 <button id="checklist-button" type="button">+</button>
             </div>
 
-            <div class="completion-container">
+            <div id="completion-container">
                 <label for="completionStatus">Completion Status</label>
                 <input id="completionStatus" type="checkbox">
             </div>
-            <button id="create-button" type="button">Create Task</button>
+            <button id="create-button" type="submit">Create Task</button>
         </form>
     </dialog>
 </body>

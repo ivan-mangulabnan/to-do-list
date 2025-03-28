@@ -1,26 +1,20 @@
 import "./index.css";
-import { passUserInput } from "./scripts/dom/user-input.js";
-import { loadFormOptions } from "./scripts/dom/form-option-getter.js";
-import { addDomChecklist } from "./scripts/dom/dom-add-checklist.js";
-import { homeInterface } from "./scripts/projects.js";
-import { pushTask, Todos } from "./scripts/todo.js";
+import { Dom } from "./scripts/dom/dom-nodes.js";
+import { saveTodo } from "./scripts/create-todo.js";
 
-const createButton = document.querySelector("#create-button");
-createButton.addEventListener("click", e => {
-    pushTask(passUserInput());
-    console.log(Todos.list);
+document.addEventListener("DOMContentLoaded", event => {
+    Dom.initialize();
 })
 
-document.addEventListener("DOMContentLoaded", e => {
-    homeInterface();
-    loadFormOptions();
-});
+const showFormBtn = document.querySelector("#show-form-btn");
+const formDialog = document.querySelector("#form-dialog");
+showFormBtn.addEventListener("click", event => {
+    formDialog.showModal();
+})
 
-const checklistButton = document.querySelector("#checklist-button");
-checklistButton.addEventListener("click", addDomChecklist );
-
-const btnShowForm = document.querySelector("#show-form-btn");
-btnShowForm.addEventListener("click", event => {
-    const dialog = document.querySelector("#form-dialog");
-    dialog.showModal();
+const form = document.querySelector("#task-form");
+form.addEventListener("submit", event => {
+    event.preventDefault();
+    saveTodo();
+    Dom.initialize();
 })
