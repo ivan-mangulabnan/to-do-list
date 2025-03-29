@@ -39,3 +39,12 @@ select {
     font-family: inherit;
     font-size: 100%;
 }
+
+button {
+    appearance: none;
+    cursor: pointer;
+}
+
+textarea {
+    resize: none;
+}

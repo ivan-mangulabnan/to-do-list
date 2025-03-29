@@ -10,11 +10,11 @@ header {
     position: fixed;
 }
 
-#content {
+.content {
     padding-left: 20rem;
 }
 
-#show-form-btn {
+.show-form-btn {
     position: fixed;
     font-size: 2rem;
     font-weight: bold;
@@ -26,25 +26,27 @@ header {
     background-color: var(--color-primary-red);
     border: 2px solid var(--color-borders);
     color: var(--color-background);
-    cursor: pointer;
 }
 
-#show-form-btn:active {
+.show-form-btn:active {
     background-color: var(--color-hover);
 }
 
-#show-form-btn:hover {
+.show-form-btn:hover {
     box-shadow: .1rem .1rem .1rem var(--color-borders);
 }
 
-#show-form-btn:focus {
+.show-form-btn:focus {
     outline: none;
 }
 
-#form-dialog {
+.form-dialog {
     position: absolute;
-    top: 30%;
-    left: 40%;
+    top: 20%;
+    left: 33%;
+    border-radius: 1rem;
+    border: 4px solid #333;
+    overflow: hidden;
 }
 
 .no-task {
@@ -70,4 +72,220 @@ header {
     font-weight: bold;
     color: var(--color-font);
     background-color: var(--color-borders);
+}
+
+.task-form {
+    height: 100%;
+
+    padding: 5px 1rem;
+    font-family: var(--font-poppins);
+    background-color: #F5F7FA;
+    color: var(--color-font);
+}
+
+.close-form-button {
+    justify-self: flex-end;
+    width: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-font);
+    border-radius: 20%;
+}
+
+.close-form-button:hover {
+    background-color: #D32F2F;
+    color: var(--color-background);
+}
+
+.new-project-container {
+    display: none;
+    flex-direction: column;
+    margin-top: 1.1rem;
+}
+
+.new-project-container button {
+    width: 5rem;
+    border-radius: .7rem;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+    background-color: var(--color-complete);
+}
+
+.new-project-container input {
+    width: 15.2rem;
+    padding: 5px .5rem;
+}
+
+.task-form > div:not(div:first-of-type) {
+    margin-top: 10px;
+}
+
+.title {
+    width: 46rem;
+    font-size: 1.5rem;
+    padding-left: .5rem;
+    height: 4rem;
+}
+
+.task-form > div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-form > div:nth-of-type(3) {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-container > div {
+    font-size: 1.1rem;
+}
+
+.project-container select {
+    font-size: 1.1rem;
+    width: 13rem;
+}
+
+.description {
+    height: 7rem;
+    width: 23rem;
+    padding: 10px;
+    font-size: 1.1rem;
+}
+
+.plus-item-btn {
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: 2.5rem;
+    border: none;
+    outline: none;
+    background-color: var(--color-complete);
+    margin-left: 5px;
+    color: var(--color-background);
+    border-radius: 20%;
+}
+
+.plus-item-btn:active {
+    background-color: #66C366;
+}
+
+.task-form label,
+.task-form span {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.task-form input,
+.task-form select,
+.task-form textarea {
+    border: 1px solid #E0E0E0;
+    outline: none;
+    border-radius: 10px;
+}
+
+.task-form select {
+    background-color: #fff;
+    padding: 3px .5rem;
+}
+
+.dueDate {
+    padding: 3px .5rem;
+}
+
+.task-form > div:nth-of-type(4) {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    gap: 5px;
+}
+
+.task-form > div:nth-of-type(4) > div:first-of-type {
+    display: grid;
+    grid-template-rows: repeat(2, auto) 1fr;
+    gap: 10px;
+    height: 15rem;
+}
+
+.task-form > div:nth-of-type(4) > div:last-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.checklist-div {
+    display: none;
+    flex: 1;
+
+    background-color: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+}
+
+.notes-container {
+    display: flex;
+}
+
+.notes {
+    flex: 1;
+    padding: 3px .5rem;
+    font-size: 1.1rem;
+}
+
+.task-form > div:last-of-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.completion-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.completion-container > label {
+    font-size: 1.5rem;
+}
+
+.completion-container > input {
+    appearance: none;
+    background-color: #fff;
+    width: 2rem;
+    height: 2rem;
+    position: relative;
+}
+
+.completion-container > input::before {
+    content: "✓";
+    font-size: 3.5rem;
+    position: absolute;
+    line-height: 0;
+    top: 10px;
+    left: -3px;
+    transform: scale(0);
+    transition: all .3s ease-in-out;
+    transform-origin: center;
+    color: var(--color-complete);
+}
+
+.completion-container > input:checked::before {
+    transform: scale(1);
+}
+
+.create-todo-btn {
+    height: 5rem;
+    width: 12rem;
+    background-color: var(--color-complete);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 1px solid #E0E0E0;
+    border-radius: 1rem;
+}
+
+.create-todo-btn:active {
+    background-color: #66C366;
 }
