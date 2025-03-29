@@ -15,7 +15,7 @@ export class Dom {
 
     static displayAllProjectTitles() {
         Dom.contentDiv.innerHTML = "";
-        Dom.contentDiv.className = "";
+        Dom.contentDiv.classList.remove("no-task");
 
         Projects.list.forEach(title => {
             const div = document.createElement("div");
@@ -75,7 +75,7 @@ export class Dom {
 }
 
 class Priority {
-    static list = ["Top Priority", "Medium Priority", "Low Prioroty"];
+    static list = ["Top Priority", "Medium Priority", "Low Priority"];
 }
 
 export class Form {
@@ -153,7 +153,3 @@ export class Form {
         this.#input["completionStatus"] = completionStatusNode.checked ? true : false;
     }
 }
-
-
-// Add priority button in form.
-// Design Form.
