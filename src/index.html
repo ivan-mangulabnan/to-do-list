@@ -12,54 +12,69 @@
             <p>Projects</p>
         </nav>
     </header>
-    <div id="content">
+    <div id="content" class="content">
     </div>
-    <button id="show-form-btn">+</button>
-    <dialog id="form-dialog">
-        <form id="task-form">
-            <button id="close-button" type="button">Close</button>
-            <div id="project-container">
-                <label for="project">Project</label>
-                <select id="project"></select>
-                <button type="button">+</button>
+    <button id="show-form-btn" class="show-form-btn">+</button>
+    <dialog id="form-dialog" class="form-dialog">
+        <form id="task-form" class="task-form">
+            <div>
+                <h2>To-do</h2>
+                <button id="close-form-button" class="close-form-button" type="button">✖</button>
             </div>
-
-            <div id="title-container">
-                <label for="title">Title</label>
-                <input id="title" type="text" required>
+            <div id="title-container" class="title-container">
+                <input id="title" class="title" type="text" placeholder="Title*" required>
             </div>
-
-            <div id="description-container">
-                <label for="description">Description</label>
-                <textarea id="description"></textarea>
+            <div>
+                <div id="description-container" class="description-container">
+                    <textarea id="description" class="description" placeholder="Description"></textarea>
+                </div>
+                <div id="project-container" class="project-container">
+                    <div>
+                        <label for="project">Project* </label>
+                        <select id="project" class="project"></select>
+                        <button id="add-project-btn" class="plus-item-btn" type="button">+</button>
+                    </div>
+                    <div class="new-project-container">
+                        <div>
+                            <label for="add-project-input">New Project </label>
+                            <input type="text" id="add-project-input">
+                        </div>
+                        <button class="new-proj-btn" type="button">ADD</button>
+                    </div>
+                </div>
             </div>
-
-            <div id="dueDate-container">
-                <label for="dueDate">Due Date</label>
-                <input id="dueDate" type="date" required>
+            <div>
+                <div>
+                    <div id="dueDate-container" class="dueDate-container">
+                        <label for="dueDate">Due Date</label>
+                        <input id="dueDate" class="dueDate" type="date" required>
+                    </div>
+        
+                    <div id="priority-container" class="priority-container">
+                        <label for="priority">Priority</label>
+                        <select id="priority" class="priority">
+                        </select>
+                    </div>
+        
+                    <div id="notes-container" class="notes-container">
+                        <textarea id="notes" class="notes" placeholder="Notes"></textarea>
+                    </div>
+                </div>
+                <div id="checklist-container" class="checklist-container">
+                    <div>
+                        <span>Checklist</span>
+                        <button id="checklist-button" class="plus-item-btn" type="button">+</button>
+                    </div>
+                    <div class="checklist-div"></div>
+                </div>
             </div>
-
-            <div id="priority-container">
-                <label for="priority">Priority</label>
-                <select id="priority">
-                </select>
+            <div>
+                <div id="completion-container" class="completion-container">
+                    <input id="completionStatus" class="completionStatus" type="checkbox">
+                    <label for="completionStatus">Mark as complete</label>
+                </div>
+                <button id="create-todo-btn" class="create-todo-btn" type="submit">Create Task</button>
             </div>
-
-            <div id="notes-container">
-                <label for="notes">Notes</label>
-                <textarea id="notes"></textarea>
-            </div>
-
-            <div id="checklist-container">
-                <span>Checklist</span>
-                <button id="checklist-button" type="button">+</button>
-            </div>
-
-            <div id="completion-container">
-                <label for="completionStatus">Completion Status</label>
-                <input id="completionStatus" type="checkbox">
-            </div>
-            <button id="create-button" type="submit">Create Task</button>
         </form>
     </dialog>
 </body>
