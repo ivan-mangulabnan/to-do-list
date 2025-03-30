@@ -115,8 +115,12 @@ header {
     background-color: var(--color-complete);
 }
 
+.new-project-container button:active {
+    background-color: #66C366;
+}
+
 .new-project-container input {
-    width: 15.2rem;
+    width: 14rem;
     padding: 5px .5rem;
 }
 

@@ -1,8 +1,8 @@
-import { Todos } from "./dom/todos.js";
-import { Form } from "./dom/dom-nodes.js";
-import { Projects } from "./projects.js";
+import { Form } from "./form.js"; 
+import { Todos } from "./todos.js";
 
 export function saveTodo() {
-    Todos.list.push(Form.input);
-    Projects.list = Form.input;
+    const input =  Form.input;
+    Todos.list.push(new Todos(input));
+    Todos.archive.push(new Todos(input));
 }

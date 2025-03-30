@@ -11,8 +11,8 @@ export class Projects {
     }
 
     static add(proj) {
-        let project = {};
+        const project = {};
         project.project = proj;
-        Projects.list = project;
+        Projects.list = project; // converts the string into obj then pass to list to check if duplicate.
     }
 }
