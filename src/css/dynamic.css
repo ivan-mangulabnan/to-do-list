@@ -5,3 +5,65 @@
 .minus-button {
     background-color: var(--color-primary-red);
 }
+
+.checklist-div > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.checklist-div > div > div:first-of-type {
+    display: flex;
+    gap: 5px;
+}
+
+.checklist-div input[type="number"] {
+    width: 4.3rem;
+    height: 2.3rem;
+    padding-left: 1rem;
+}
+
+.checklist-div input[type="text"] {
+    width: 11.3rem;
+    height: 2.3rem;
+    padding-left: 1rem;
+}
+
+.checklist-div input[type="checkbox"] {
+    width: 1.3rem;
+    height: 1.3rem;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 0;
+    align-self: center;
+    position: relative;
+}
+
+.checklist-div input[type="checkbox"]::before {
+    position: absolute;
+    content: "✓";
+    font-size: 2rem;
+    top: -1rem;
+    left: -.3rem;
+    color: var(--color-complete);
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+}
+
+.checklist-div input[type="checkbox"]:checked:before {
+    transform: scale(1);
+}
+
+.checklist-div button {
+    width: 2rem;
+    font-weight: bold;
+    border-radius: .5rem;
+    border: 1px solid #E0E0E0;
+}
+
+.checklist-div button:hover {
+    background-color: var(--color-primary-red);
+    color: var(--color-background);
+}
