@@ -42,3 +42,8 @@ newProjBtn.addEventListener("click", event => {
 
 const checklistBtn = document.querySelector("#checklist-button");  // checklist adder.
 checklistBtn.addEventListener("click", FormDom.addChecklist);
+
+const mainCheckDiv = document.querySelector("#checklist-div"); // checklist remover.
+mainCheckDiv.addEventListener("click", event => {
+    if (event.target.matches("button")) FormDom.removeChecklist(event.target);
+})
