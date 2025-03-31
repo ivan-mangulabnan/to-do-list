@@ -59,6 +59,7 @@ export class Dom {
             option.textContent = priority;
             priorityNode.appendChild(option);
         })
+        priorityNode.value = Priority.list[1];
     }
 
     static displayTodo() {
@@ -104,18 +105,18 @@ export class FormDom extends Dom {
        const input = document.querySelector("#add-project-input");
        const project = document.querySelector("#project");
 
-       if (!Validation.notEmpty(input.value)) {
+       if (!Validation.notEmpty(input.value)) { //Checks if empty or just pure white space.
             input.setCustomValidity("This field cannot be empty.");
             input.reportValidity();
             return
        }
 
        Projects.add(input.value);
-       input.value = "";
        super.hideProjectAdder();
        super.loadFormOptions();
+
+       project.value = input.value; // sets the input value as it's default.
+
+       input.value = "";
     }
 }
-
-// Do the manipulation of select option.
-// Edit the preview Display of home.
