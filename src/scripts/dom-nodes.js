@@ -119,4 +119,31 @@ export class FormDom extends Dom {
 
        input.value = "";
     }
+
+    static addChecklist() {
+        const mainCheckDiv = document.querySelector("#checklist-div");
+
+        const allChecklists = mainCheckDiv.querySelectorAll(".checkdiv"); // To determine the data-id attribute.
+
+        const outerDiv = document.createElement("div");
+        outerDiv.classList.add("checkdiv");
+        outerDiv.setAttribute("data-id", `${allChecklists.length + 1}`);
+
+        const innerDiv1 = document.createElement("div");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        const input = document.createElement("input");
+        input.type = "text";
+        const quantity = document.createElement("input");
+        quantity.type = "number";
+
+        const innerDiv2 = document.createElement("div");
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "x";
+
+        innerDiv2.appendChild(delBtn);
+        innerDiv1.append(checkbox, input, quantity);
+        outerDiv.append(innerDiv1, innerDiv2);
+        mainCheckDiv.appendChild(outerDiv);
+    }
 }
