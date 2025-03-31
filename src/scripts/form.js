@@ -42,24 +42,21 @@ export class Form {
     
     static getChecklist() {
         const checklistDiv = document.querySelector("#checklist-div");
-        const checklists = Array.from(checklistDiv.querySelectorAll("div"));
-    
+        const checklists = Array.from(checklistDiv.querySelectorAll("[data-id]"));
+        
         if (checklists.length === 0) {
             this.#input["checklist"] = null;
-            return
+            return 
         }
     
         let checklistArr = [];
     
         checklists.forEach(checklist => {
-            const textNode = checklist.querySelector("input");
-            textNode.type = "text";
+            const textNode = checklist.querySelector(`input[type="text"]`);
             const text = textNode.value;
-            const quantityNode = checklist.querySelector("input");
-            quantityNode.type = "number";
+            const quantityNode = checklist.querySelector(`input[type="number"]`);
             const quantity = quantityNode.value;
-            const statusNode = checklist.querySelector("input");
-            statusNode.type = "checkbox";
+            const statusNode = checklist.querySelector(`input[type="checkbox"]`);
             const status = statusNode.checked ? true : false;
     
             checklistArr.push({text, quantity, status});
