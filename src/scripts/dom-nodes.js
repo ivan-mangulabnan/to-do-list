@@ -146,4 +146,9 @@ export class FormDom extends Dom {
         outerDiv.append(innerDiv1, innerDiv2);
         mainCheckDiv.appendChild(outerDiv);
     }
+
+    static removeChecklist(target) {
+        const targetDiv = target.closest("[data-id]");
+        targetDiv.remove();
+    }
 }
