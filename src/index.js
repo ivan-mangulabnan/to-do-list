@@ -9,7 +9,11 @@ document.addEventListener("DOMContentLoaded", event => { // initialze the page.
 const showFormBtn = document.querySelector("#show-form-btn"); 
 const formDialog = document.querySelector("#form-dialog");
 showFormBtn.addEventListener("click", event => { // dialog shower
+    
+    Dom.loadFormOptions();
+    Dom.loadPriorities();
     formDialog.showModal();
+    
 })
 
 const form = document.querySelector("#task-form"); // check for submission
