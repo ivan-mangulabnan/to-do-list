@@ -2,6 +2,11 @@
     display: flex;
 }
 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .minus-button {
     background-color: var(--color-primary-red);
 }
@@ -65,5 +70,46 @@
 
 .checklist-div button:hover {
     background-color: var(--color-primary-red);
-    color: var(--color-background);
+    color: #E0E0E0;
+}
+
+.project-div {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.project-edit-btn {
+    content: "";
+    background: url("./images/pencil.svg");
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    align-self: center;
+    background-color:  transparent;
+    filter: invert(1);
+}
+
+.project-innerdiv-first {
+    background-color: var(--color-primary-red);
+    padding: 1rem 3rem 1rem 1rem;
+    justify-content: space-between;
+    border: 2px solid var(--color-secondary-red);
+    box-shadow: 1px 6px 8px #666666;
+}
+
+.btnDiv {
+    display:flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.delBtn {
+    content: "";
+    background-image: url("./images/trash-can-outline.svg");
+    width: 2rem;
+    height: 2rem;
+    background-color: transparent;
+    filter: invert(1);
+    border: none;
 }

@@ -70,8 +70,8 @@ header {
     font-size: 3rem;
     font-family: "Poppins";
     font-weight: bold;
-    color: var(--color-font);
-    background-color: var(--color-borders);
+    color: var(--color-background);
+    background-color: transparent;
 }
 
 .task-form {
