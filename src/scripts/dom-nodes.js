@@ -31,9 +31,6 @@ export class Dom {
     }
 
     static initialize() {
-        Dom.loadFormOptions();
-        Dom.loadPriorities();
-
         if (Todos.isEmpty() === true) {
             Dom.noTask();
         } else {
@@ -65,7 +62,6 @@ export class Dom {
     static displayTodo() {
         Todos.list.forEach(todo => {
             const div = Dom.contentDiv.querySelector(`[data-project="${todo.project}"]`);
-            if (div === null) console.log("Yes it's null");
             const taskDiv = document.createElement("div");
             const titleNode = document.createElement("h4");
             titleNode.textContent = todo.title;
