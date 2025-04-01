@@ -36,9 +36,13 @@ export class Dom {
             delBtn.classList.toggle("delBtn");
             h3.textContent = title;
             h3.classList.add("project-name");
+
+            const innerdiv2 = document.createElement("div");
+            innerdiv2.id = "allTodosDiv";
+
             btnDiv.append(editBtn, delBtn);
             innverDiv.append(h3, btnDiv);
-            div.appendChild(innverDiv);
+            div.append(innverDiv, innerdiv2);
             Dom.contentDiv.appendChild(div);
         })
     }
@@ -64,6 +68,7 @@ export class Dom {
 
     static loadPriorities() {
         const priorityNode = document.querySelector("#priority");
+        priorityNode.innerHTML = "";
         Priority.list.forEach(priority => {
             const option = document.createElement("option");
             option.textContent = priority;
@@ -73,22 +78,52 @@ export class Dom {
     }
 
     static displayTodo() {
+
         Todos.list.forEach(todo => {
             const div = Dom.contentDiv.querySelector(`[data-project="${todo.project}"]`);
-            const taskDiv = document.createElement("div");
-            const titleNode = document.createElement("h4");
-            titleNode.textContent = todo.title;
-            const descriptionNode = document.createElement("p");
-            descriptionNode.textContent = todo.description;
-            taskDiv.append(titleNode,descriptionNode);
-            div.append(taskDiv);
+
+            const allTodosDiv = div.querySelector("#allTodosDiv");
+            allTodosDiv.classList.add("allTodosDiv");
+
+            const todoDiv = document.createElement("div");
+            todoDiv.classList.add("todoDiv");
+            const colorDiv = document.createElement("div");
+            colorDiv.classList.add(`${Dom.addColorToTodo(todo.priority)}`);
+            const title = document.createElement("h4");
+            title.textContent = todo.title;
+            title.classList.add("todoTitle");
+            const buttonsDiv = document.createElement("div");
+            buttonsDiv.classList.add("buttonsDiv");
+            const editButton = document.createElement("button");
+            editButton.classList.add("editButton");
+            const delButton = document.createElement("button");
+            delButton.classList.add("delButton");
+
+            buttonsDiv.append(editButton, delButton);
+            todoDiv.append(colorDiv, title, buttonsDiv);
+            allTodosDiv.appendChild(todoDiv);
         })
+    }
+
+    static addColorToTodo(priority) {
+        switch(priority) {
+            case "Top Priority":
+                return "topPrio";
+            break
+            case "Medium Priority":
+                return "midPrio";
+            break
+            case "Low Priority":
+                return "lowPrio";
+            break
+        }
     }
 
     static closeForm() {
         const form = document.querySelector("#task-form");
         const dialog = document.querySelector("#form-dialog");
         form.reset();
+        FormDom.clearChecklist();
         dialog.close();
     }
 
@@ -159,5 +194,10 @@ export class FormDom extends Dom {
     static removeChecklist(target) {
         const targetDiv = target.closest("[data-id]");
         targetDiv.remove();
+    }
+
+    static clearChecklist() {
+        const mainCheckDiv = document.querySelector("#checklist-div");
+        mainCheckDiv.innerHTML = "";
     }
 }
