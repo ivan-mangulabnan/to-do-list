@@ -21,11 +21,24 @@ export class Dom {
 
         Todos.getProjectsWithTodo().forEach(title => {
             const div = document.createElement("div");
+            div.classList.add("project-div");
             div.setAttribute("data-project", `${title}`);
+            const innverDiv = document.createElement("div");
+            innverDiv.classList.toggle("flex");
+            innverDiv.classList.toggle("gap");
+            innverDiv.classList.add("project-innerdiv-first");
             const h3 = document.createElement("h3");
+            const btnDiv = document.createElement("div");
+            btnDiv.classList.add("btnDiv");
+            const editBtn = document.createElement("button");
+            editBtn.classList.toggle("project-edit-btn");
+            const delBtn = document.createElement("button");
+            delBtn.classList.toggle("delBtn");
             h3.textContent = title;
             h3.classList.add("project-name");
-            div.appendChild(h3);
+            btnDiv.append(editBtn, delBtn);
+            innverDiv.append(h3, btnDiv);
+            div.appendChild(innverDiv);
             Dom.contentDiv.appendChild(div);
         })
     }
