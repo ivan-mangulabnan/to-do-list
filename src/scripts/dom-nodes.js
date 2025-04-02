@@ -48,6 +48,8 @@ export class Dom {
     }
 
     static initialize() {
+        Nav.showProjects();
+
         if (Todos.isEmpty() === true) {
             Dom.noTask();
         } else {
@@ -199,5 +201,43 @@ export class FormDom extends Dom {
     static clearChecklist() {
         const mainCheckDiv = document.querySelector("#checklist-div");
         mainCheckDiv.innerHTML = "";
+    }
+}
+
+export class Nav {
+    static showProjects() {
+        const projectDiv = document.querySelector("#nav-projects");
+        projectDiv.innerHTML = "";
+
+        Projects.list.forEach(project => {
+            const div = document.createElement("div");
+            const p = document.createElement("p");
+            const a = document.createElement("a");
+            a.textContent = project;
+            a.href = "";
+            a.classList.add("project-link");
+            p.appendChild(a);
+            div.appendChild(p);
+            projectDiv.appendChild(div);
+        })
+    }
+
+    static highlightDirectory(event) {
+        const nav = document.querySelector("nav");
+        const allLinksUnderNav = nav.querySelectorAll("a");
+
+        if (event.target.matches("a")) {
+            event.preventDefault();
+            const title = event.target.textContent;
+
+            Array.from(allLinksUnderNav).forEach(link => {
+                const closestDiv = link.closest("div");
+                if (title === link.textContent) {
+                    closestDiv.classList.add("nav-location");
+                } else {
+                    closestDiv.classList.remove("nav-location");
+                }
+            })
+        }
     }
 }
