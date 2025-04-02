@@ -191,3 +191,23 @@ button:hover {
     text-align: center;
     word-wrap: break-word;
 }
+
+.nav-projects {
+    padding-right: 1rem;
+}
+
+.nav-projects > div {
+    padding: .3rem 1rem;
+    margin-bottom: .7rem;
+}
+
+.nav-projects p {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.nav-location {
+    border-left: .45rem solid var(--color-secondary-red);
+    background-color: var(--color-hover);
+    color: var(--color-background);
+}
