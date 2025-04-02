@@ -1,5 +1,5 @@
 import "./index.css";
-import { Dom, FormDom } from "./scripts/dom-nodes.js";
+import { Dom, FormDom, Nav } from "./scripts/dom-nodes.js";
 import { saveTodo } from "./scripts/create-todo.js";
 
 document.addEventListener("DOMContentLoaded", event => { // initialze the page.
@@ -50,4 +50,9 @@ checklistBtn.addEventListener("click", FormDom.addChecklist);
 const mainCheckDiv = document.querySelector("#checklist-div"); // checklist remover.
 mainCheckDiv.addEventListener("click", event => {
     if (event.target.matches("button")) FormDom.removeChecklist(event.target);
+})
+
+const nav = document.querySelector("nav");
+nav.addEventListener("click", event => {
+    Nav.highlightDirectory(event);
 })
