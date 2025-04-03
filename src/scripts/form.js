@@ -1,3 +1,5 @@
+import { Validation } from "./validation.js";
+
 export class Form {
 
     static #input = {}
@@ -59,6 +61,7 @@ export class Form {
             const statusNode = checklist.querySelector(`input[type="checkbox"]`);
             const status = statusNode.checked ? true : false;
     
+            if (!Validation.notEmpty(text)) return
             checklistArr.push({text, quantity, status});
         })
     
