@@ -211,3 +211,135 @@ button:hover {
     background-color: var(--color-hover);
     color: var(--color-background);
 }
+
+/* .projectMainDiv {
+    height: 100vh;
+} */
+
+.projectTitleDiv {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 3rem 1rem 1rem;
+    font-family: var(--font-poppins);
+    background-color: var(--color-primary-red);
+    border: 2px solid var(--color-secondary-red);
+    box-shadow: 1px 6px 8px #666666;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.btnsDiv {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.empty {
+    margin-top: 25%;
+    margin-left: 37%;
+    font-family: var(--font-lato);
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--color-borders);
+}
+
+.withTodo {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.todo-wrapper {
+    padding: 1rem;
+    background-color: #F5F7FA;
+    border-radius: 1rem;
+}
+
+.todo-main-div {
+    margin-bottom: 1rem;
+}
+
+.todo-headers {
+    font-size: .9rem;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #808080;
+    margin-bottom: .3rem;
+}
+
+.todo-content-wrapper {
+    background-color: #fff;
+    padding: .5rem;
+    border-radius: 1rem;
+}
+
+.todo-content-item {
+    font-size: 1.3rem;
+    font-family: var(--font-lato);
+}
+
+.date-prio-div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+}
+
+.top {
+    color: #fff;
+    background-color: #E74C3C;
+}
+
+.mid {
+    color: #fff;
+    background-color: #F4C542;
+}
+
+.low {
+    color: #fff;
+    background-color: #B0B0B0;
+}
+
+.completed {
+    background-color: var(--color-complete);
+    color: #fff;
+}
+
+.in-progress {
+    background-color: #e9e934;
+}
+
+.check-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: .5rem;
+}
+
+.chk-div {
+    border-radius: 1rem;
+    padding: 1rem 1rem;
+    background-color: #F5F7FA;
+}
+
+.chk-status {
+    font-size: .8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    width: max-content;
+    padding: .3rem 1rem;
+    border-radius: 1rem;
+    margin-bottom: .3rem;
+}
+
+.chkp {
+    padding: .4rem .8rem;
+    border-radius: 1rem;
+    font-weight: bold;
+    background-color: #fff;
+    color: #333;
+}
+
+.todo:hover {
+    box-shadow: 2px 3px 4px #666666;
+}
