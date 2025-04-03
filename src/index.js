@@ -3,7 +3,7 @@ import { Dom, FormDom, Nav } from "./scripts/dom-nodes.js";
 import { saveTodo } from "./scripts/create-todo.js";
 
 document.addEventListener("DOMContentLoaded", event => { // initialze the page.
-    Dom.initialize();
+    Dom.initialize();;
 })
 
 const showFormBtn = document.querySelector("#show-form-btn"); 
@@ -52,7 +52,15 @@ mainCheckDiv.addEventListener("click", event => {
     if (event.target.matches("button")) FormDom.removeChecklist(event.target);
 })
 
-const nav = document.querySelector("nav");
+const nav = document.querySelector("nav"); // Nav highlight design when clicked.
 nav.addEventListener("click", event => {
     Nav.highlightDirectory(event);
+})
+
+const homeButton = document.querySelector("#home-link"); // Home Display.
+homeButton.addEventListener("click", Dom.initialize);
+
+const navProjectDiv = document.querySelector("#nav-projects"); // Project Navs
+navProjectDiv.addEventListener("click", event => {
+    Dom.loadFullProject(event);
 })
