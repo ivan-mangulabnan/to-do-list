@@ -1,4 +1,6 @@
+import { Todos } from "./todos.js";
 import { Validation } from "./validation.js";
+import * as dateFns from "date-fns";
 
 export class Form {
 
@@ -71,5 +73,10 @@ export class Form {
     static getCompletionStatus() {
         const completionStatusNode = document.querySelector("#completionStatus");
         this.#input["completionStatus"] = completionStatusNode.checked ? true : false;
+    }
+
+    static getID() {
+        const count = Todos.list.length;
+        this.#input["id"] = `id-${dateFns.format(new Date(), "yyyyMMdd-HHmmss")}`;
     }
 }
