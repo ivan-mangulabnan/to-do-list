@@ -289,16 +289,19 @@ button:hover {
 .top {
     color: #fff;
     background-color: #E74C3C;
+    font-weight: bold;
 }
 
 .mid {
     color: #fff;
     background-color: #F4C542;
+    font-weight: bold;
 }
 
 .low {
     color: #fff;
     background-color: #B0B0B0;
+    font-weight: bold;
 }
 
 .completed {
@@ -342,4 +345,282 @@ button:hover {
 
 .todo:hover {
     box-shadow: 2px 3px 4px #666666;
+}
+
+.btn-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chkbox {
+    appearance: none;
+    background: #fff;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: .4rem;
+    border: 1px solid var(--color-borders);
+    position: relative;
+}
+
+.chkbox:checked::before {
+    position: absolute;
+    content: "✓";
+    font-size: 2rem;
+    font-weight: bold;
+    top: -.8rem;
+    left: -.1rem;
+    color: var(--color-complete);
+}
+
+.completion-div {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.mark {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.mod-rmv-div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-dialog {
+    top: 5%;
+    left: 38%;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 512px;
+}
+
+.modify-button {
+    outline: none;
+}
+
+.remove-button {
+    outline: none;
+}
+
+.edit-header {
+    font-size: .8rem;
+    font-weight: bold;
+    font-family: var(--font-poppins);
+    color: #333;
+    letter-spacing: .2rem;
+    padding-left: .6rem;
+}
+
+.edit-main-div {
+    display: grid;
+    gap: .5rem;
+}
+
+.edit-section-div {
+    display: grid;
+    gap: .3rem;
+    background-color: #F5F7FA;
+    border-radius: 1rem;
+    padding: .3rem;
+}
+
+.edit-item-select {
+    padding: .3rem .5rem;
+    background-color: #fff;
+    outline: none;
+    font-size: 1.1rem;
+    border-radius: 1rem;
+    border: none;
+}
+
+.edit-item-input {
+    padding: .3rem .5rem;
+    background-color: #fff;
+    outline: none;
+    font-size: 1.1rem;
+    border-radius: 1rem;
+    border: none;
+    width: 29rem;
+}
+
+.edit-item-date {
+    width: fit-content;
+}
+
+.edit-item-textarea {
+    padding: .3rem .5rem;
+    background-color: #fff;
+    outline: none;
+    font-size: 1rem;
+    border-radius: 1rem;
+    border: none;
+    width: 29rem;
+    height: 4rem;
+}
+
+.checklist-entity-div {
+    display: flex;
+    align-items: center;
+    margin-bottom: .2rem;
+}
+
+.checklist-entity-div p {
+    font-size: .8rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.checklist-entity-div > div:first-of-type {
+    margin-left: 1rem;
+}
+
+.checklist-entity-div > div:nth-of-type(2) {
+    margin-left: 2rem;
+    margin-right: auto;
+}
+
+.checklist-entity-div > div:nth-of-type(3) {
+    margin-right: 2.9rem;
+}
+
+.checklist-chkdiv {
+    display: grid;
+    gap: .4rem;
+    max-height: 4.5rem;
+    overflow: auto;
+    padding: .3rem 0;
+    align-items: center;
+}
+
+.checklist-single-div {
+    display: flex;
+}
+
+.checklist-single-div > div:first-of-type {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+    margin-right: 1rem;
+}
+
+.checklist-single-div > div:nth-of-type(2) {
+    margin-left: 1.5rem;
+    margin-right: 1rem;
+    border: none;
+}
+
+.checklist-single-div > div:nth-of-type(3) {
+    margin-left: .8rem;
+}
+
+.checklist-single-div input[type="number"] {
+    width: 5rem;
+}
+
+.checklist-single-div input[type="text"] {
+    width: 16rem;
+}
+
+.checklist-single-div input[type="number"],
+.checklist-single-div input[type="text"] {
+    border: none;
+    padding: .3rem .5rem;
+    border-radius: 1rem;
+    outline: none;
+}
+
+.checklist-single-div input[type="checkbox"] {
+    appearance: none;
+    width: 1.3rem;
+    height: 1.3rem;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid var(--color-borders);
+    border-radius: .4rem;
+    position: relative;
+}
+
+.checklist-single-div input[type="checkbox"]::before {
+    content: "✔";
+    position: absolute;
+    font-size: 1.4rem;
+    top: -7px;
+    color: var(--color-complete);
+    transform: scale(0);
+    transition: all .2s ease-in-out;
+}
+
+.checklist-single-div input[type="checkbox"]:checked::before {
+    transform-origin: center;
+    transform: scale(1);
+    transition: all .2s ease-in-out;
+}
+
+.edit-completion-div {
+    display: flex;
+    align-items: center;
+}
+
+.edit-completion-div > input {
+    appearance: none;
+    width: 1.3rem;
+    height: 1.3rem;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid var(--color-borders);
+    border-radius: .4rem;
+    position: relative;
+    margin-left: 1.9rem;
+}
+
+.edit-completion-div > input::before {
+    content: "✔";
+    position: absolute;
+    font-size: 1.4rem;
+    top: -7px;
+    color: var(--color-complete);
+    transform: scale(0);
+    transition: all .2s ease-in-out;
+}
+
+.edit-completion-div input:checked::before {
+    transform-origin: center;
+    transform: scale(1);
+    transition: all .2s ease-in-out;
+}
+
+.edit-completion-div > p {
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.edit-btn-div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.edit-btn-div > button {
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+}
+
+.edit-btn-div > button:hover {
+    text-shadow: 1px 2px 3px #666666;
+}
+
+.edit-aprv-btn {
+    color: var(--color-complete);
+}
+
+.edit-rmv-btn {
+    color: var(--color-primary-red);
 }
