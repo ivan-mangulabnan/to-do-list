@@ -97,9 +97,10 @@ export class Dom {
         } else {
             todoDiv.classList.add("withTodo");
 
-            filteredTodos.forEach(todo => {
+            filteredTodos.forEach((todo, index) => {
 
                 const todoWrapper = document.createElement("div");
+                todoWrapper.setAttribute("data-id", todo.id);
                 todoWrapper.classList.add("todo-wrapper");
                 todoWrapper.classList.add("todo");
 
@@ -260,7 +261,42 @@ export class Dom {
                     todoWrapper.append(checkDiv);
                 }
 
+                const btnDiv = document.createElement("div"); // ButtonDiv starts Here
+                btnDiv.classList.add("btn-div");
                 
+                const completionDiv = document.createElement("div");
+                completionDiv.classList.add("completion-div");
+
+                const chkbox = document.createElement("input");
+                chkbox.classList.add("chkbox");
+                chkbox.type = "checkbox";
+                chkbox.id = `complete${index + 1}`;
+                chkbox.disabled = true;
+
+                if (todo.completionStatus) {
+                    chkbox.checked = true;
+                }
+
+                const label = document.createElement("label");
+                label.classList.add("mark");
+                label.textContent = "MARK AS COMPLETE";
+                label.htmlFor = `complete${index + 1}`;
+
+                completionDiv.append(chkbox, label);
+                
+                const editDelDiv = document.createElement("div");
+                editDelDiv.classList.add("mod-rmv-div");
+                const modBtn = document.createElement("button");
+                modBtn.classList.add("editButton");
+                modBtn.classList.add("modify-button");
+                const rmvBtn = document.createElement("button");
+                rmvBtn.classList.add("delButton");
+                rmvBtn.classList.add("remove-button");
+
+                editDelDiv.append(modBtn, rmvBtn);
+
+                btnDiv.append(completionDiv, editDelDiv);
+                todoWrapper.append(btnDiv);
             })
         }
 
@@ -277,6 +313,7 @@ export class Dom {
         Projects.list.forEach(project => {
             const option = document.createElement("option");
             option.textContent = project;
+            option.value = project;
             projectNode.appendChild(option);
         })
     }
@@ -301,6 +338,7 @@ export class Dom {
             allTodosDiv.classList.add("allTodosDiv");
 
             const todoDiv = document.createElement("div");
+            todoDiv.setAttribute("data-id", todo.id);
             todoDiv.classList.add("todoDiv");
             const colorDiv = document.createElement("div");
             colorDiv.classList.add(`${Dom.addColorToTodo(todo.priority)}`);
@@ -311,13 +349,176 @@ export class Dom {
             buttonsDiv.classList.add("buttonsDiv");
             const editButton = document.createElement("button");
             editButton.classList.add("editButton");
+            editButton.classList.add("modify-button");
             const delButton = document.createElement("button");
             delButton.classList.add("delButton");
+            delButton.classList.add("remove-button");
 
             buttonsDiv.append(editButton, delButton);
             todoDiv.append(colorDiv, title, buttonsDiv);
             allTodosDiv.appendChild(todoDiv);
         })
+    }
+
+    static editTodoDisplay(target) {
+        const todo = target.closest("[data-id]");
+        const todoId = todo.getAttribute("data-id");
+        
+        const targetTodo = Todos.list.filter(todo => todo.id === todoId).shift(); // filters the array then takes out the first item.
+
+        const dialog = document.createElement("dialog");
+        dialog.classList.add("edit-dialog");
+        document.body.appendChild(dialog);
+
+        const form = document.createElement("form");
+        form.classList.add("edit-form");
+        dialog.appendChild(form);
+
+        const editMainDiv = document.createElement("div");
+        editMainDiv.classList.add("edit-main-div");
+        form.appendChild(editMainDiv);
+
+        function createSection(editMainDiv, propertyName, propertyValue) {
+            const div = document.createElement("div");
+            div.classList.add("edit-section-div");
+            const header = document.createElement("p");
+            header.classList.add("edit-header");
+
+            if (propertyName === "completionStatus") {
+                header.textContent = "COMPLETION STATUS";
+            } else {
+                header.textContent = propertyName.toUpperCase();
+            }
+
+            const itemDiv = document.createElement("div");
+            itemDiv.classList.add("edit-item-div");
+
+            if (propertyName === "priority" || propertyName === "project") {
+                let optionArr;
+                const item = document.createElement("select");
+                if (propertyName === "priority") {
+                    optionArr = Priority;
+                    item.id = "ed-priority";
+                }
+                if (propertyName === "project") {
+                    item.id = "ed project";
+                    div.classList.add("edit-project");
+                    const addbtn = FormDom.addButton(div);
+                    addbtn.classList.add("edit-add-proj");
+                    const newProj = FormDom.createProjectAdder(div);
+                    newProj.classList.add("edit-new-proj");
+                    optionArr = Projects;
+                }
+
+                optionArr.list.forEach(opt => {
+                    const option = document.createElement("option");
+                    option.textContent = opt;
+                    option.value = opt;
+                    item.appendChild(option);
+                })
+
+                item.classList.add("edit-item-select");
+                item.value = propertyValue;
+                itemDiv.appendChild(item);
+
+            } else if (propertyName === "description" || propertyName === "notes") {
+                const item = document.createElement("textarea");
+                if (propertyName === "description") {
+                    item.id = "ed-description";
+                }
+                if (propertyName === "notes") {
+                    item.id = "ed-notes";
+                }
+                item.classList.add("edit-item-textarea");
+                item.value = propertyValue;
+                itemDiv.appendChild(item);
+
+            } else if (propertyName === "checklist") { 
+                div.classList.add("edit-checklist");
+                const plus = FormDom.addButton(div);
+                plus.classList.add("checklist-plus");
+                const itemInnerDiv = document.createElement("div");
+                const entityDiv = document.createElement("div");
+                entityDiv.classList.add("checklist-entity-div");
+                const p1Div = document.createElement("div");
+                const p1 = document.createElement("p");
+                p1.textContent = "STATUS";
+                p1Div.appendChild(p1);
+                const p2Div = document.createElement("div");
+                const p2 = document.createElement("p");
+                p2.textContent = "ITEM";
+                p2Div.appendChild(p2);
+                const p3Div = document.createElement("div");
+                const p3 = document.createElement("p");
+                p3.textContent = "QTY.";
+                p3Div.appendChild(p3);
+                entityDiv.append(p1Div, p2Div, p3Div);
+
+                const checkDiv = document.createElement("div");
+                checkDiv.classList.add("checklist-chkdiv");
+
+                propertyValue.forEach(checklist => {
+                    FormDom.utilChecklist(checkDiv, checklist.status, checklist.text, checklist.quantity);
+                })
+
+                itemInnerDiv.append(entityDiv, checkDiv);
+                itemDiv.appendChild(itemInnerDiv);
+
+            } else if (propertyName === "completionStatus") {
+                itemDiv.classList.add("edit-completion-div");
+                const item = document.createElement("input");
+                item.id = "ed-complete";
+                item.classList.add("edit-completion-status");
+                const label = document.createElement("p");
+                label.classList.add("edit-completion-label");
+                item.type = "checkbox";
+                if (propertyValue === true) item.checked = true;
+                label.textContent = item.checked ? "COMPLETED" : "NOT YET COMPLETED";
+                itemDiv.append(item, label);
+            } else {
+                const item = document.createElement("input");
+
+                if (propertyName === "dueDate") {
+                    item.type = "date";
+                    item.classList.add("edit-item-date");
+                    item.id = "ed-dueDate";
+                }
+
+                if (propertyName === "title") {
+                    item.type = "text";
+                    item.id = "ed-title";
+                }
+
+                item.classList.add("edit-item-input");
+                item.value = propertyValue;
+                itemDiv.appendChild(item);
+            }
+
+            div.append(header, itemDiv);
+            editMainDiv.appendChild(div);
+        }
+
+        for (let key in targetTodo) {
+            if (key !== "id") {
+                createSection(editMainDiv, key, targetTodo[key]);
+            }
+        }
+
+        const btnDiv = document.createElement("div");
+        btnDiv.classList.add("edit-btn-div");
+        const approveBtn = document.createElement("button");
+        approveBtn.classList.add("edit-aprv-btn");
+        approveBtn.textContent = "✔";
+        approveBtn.type = "submit";
+        const cancelBtn = document.createElement("button");
+        cancelBtn.classList.add("edit-rmv-btn");
+        cancelBtn.textContent = "✖";
+        cancelBtn.type = "button";
+        btnDiv.append(approveBtn, cancelBtn);
+        editMainDiv.appendChild(btnDiv);
+
+        dialog.showModal();
+
     }
 
     static addColorToTodo(priority) {
@@ -414,6 +615,64 @@ export class FormDom extends Dom {
     static clearChecklist() {
         const mainCheckDiv = document.querySelector("#checklist-div");
         mainCheckDiv.innerHTML = "";
+    }
+
+    static utilChecklist(parentDiv, stat, text, quantity) {
+        const singleChkDiv = document.createElement("div");
+        singleChkDiv.classList.add("checklist-single-div");
+        const statusDiv = document.createElement("div");
+        const status = document.createElement("input");
+        status.type = "checkbox";
+        if (stat === true) status.checked = true;
+        statusDiv.appendChild(status);
+        const itemDiv = document.createElement("div");
+        const item = document.createElement("input");
+        item.type = "text";
+        item.value = text;
+        itemDiv.appendChild(item);
+        const qtyDiv = document.createElement("div");
+        const qty = document.createElement("input");
+        qty.type = "number";
+        qty.value = quantity;
+        const delDiv = document.createElement("div");
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "✖";
+        delBtn.type = "button";
+        delBtn.classList.add("rmv-btn");
+
+        delDiv.appendChild(delBtn);
+        qtyDiv.appendChild(qty);
+        singleChkDiv.append(statusDiv, itemDiv, qtyDiv, delDiv);
+        parentDiv.appendChild(singleChkDiv);
+    }
+
+    static addButton(parentElement) {
+        const button = document.createElement("button");
+        button.textContent = "✚";
+        button.type = "button";
+        parentElement.appendChild(button);
+        return button;
+    }
+
+    static createProjectAdder(parentElement) {
+        const mainContainer = document.createElement("div");
+        const inputContainer = document.createElement("div");
+        const para = document.createElement("p");
+        para.textContent = "NEW PROJECT";
+        const input = document.createElement("input");
+        input.classList.add("plus-proj-input");
+        input.type = "text";
+        const btnContainer = document.createElement("div");
+        const addBtn = document.createElement("button");
+        addBtn.classList.add("plus-proj");
+        addBtn.textContent = "ADD";
+        addBtn.type = "button";
+
+        inputContainer.append(para, input);
+        btnContainer.appendChild(addBtn);
+        mainContainer.append(inputContainer, btnContainer);
+        parentElement.appendChild(mainContainer);
+        return mainContainer;
     }
 }
 
