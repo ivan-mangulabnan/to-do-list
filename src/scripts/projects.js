@@ -1,5 +1,5 @@
 export class Projects {
-    static #list = ["Default"];
+    static #list = ["General"];
 
     static get list() {
         return Projects.#list;
