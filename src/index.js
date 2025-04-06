@@ -3,6 +3,7 @@ import { Dom, FormDom, Nav } from "./scripts/dom-nodes.js";
 import { saveTodo } from "./scripts/create-todo.js";
 import { Validation } from "./scripts/validation.js";
 import { Projects } from "./scripts/projects.js";
+import { Todos } from "./scripts/todos.js";
 
 document.addEventListener("DOMContentLoaded", event => { // initialze the page.
     Dom.initialize();;
@@ -142,5 +143,21 @@ document.addEventListener("click", event => {
     if (event.target.matches(".edit-rmv-btn")) { // whole dialog remove.
         const editDialog = document.querySelector(".edit-dialog");
         editDialog.remove();
+    }
+
+    if (event.target.matches(".edit-aprv-btn")) { // whole dialog remove.
+        const id = document.querySelector("#ed-id").value;
+        const editDialog = document.querySelector(".edit-dialog");
+
+        Dom.updateTodo(id);
+        Dom.initialize();
+        editDialog.remove();
+    }
+
+    if (event.target.matches(".remove-button")) { // remove todo.
+        const id = event.target.closest("[data-id]").getAttribute("data-id");
+        const todo = Todos.list.findIndex(todo => todo.id);
+        Todos.list.splice(todo, 1);
+        Dom.initialize();
     }
 })
