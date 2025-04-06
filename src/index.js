@@ -6,7 +6,9 @@ import { Projects } from "./scripts/projects.js";
 import { Todos } from "./scripts/todos.js";
 
 document.addEventListener("DOMContentLoaded", event => { // initialze the page.
-    Dom.initialize();;
+    const savedItems = JSON.parse(localStorage.getItem("list"));
+    if (savedItems !== null) savedItems.forEach(todo => Todos.list.push(new Todos(todo)));
+    Dom.initialize();
 })
 
 const showFormBtn = document.querySelector("#show-form-btn"); 
@@ -27,6 +29,10 @@ form.addEventListener("submit", event => {
     Dom.closeForm();
 })
 
+form.addEventListener("keydown", event => {
+    if (event.key === "Escape") Dom.hideProjectAdder();
+})
+
 const closeFormButton = document.querySelector("#close-form-button"); // dialog closer
 closeFormButton.addEventListener("click", event => {
     Dom.closeForm();
@@ -45,6 +51,7 @@ projectAdderBtn.addEventListener("click", event => {
 const newProjBtn = document.querySelector(".new-proj-btn"); // project adder
 newProjBtn.addEventListener("click", event => {
     FormDom.addProject();
+    // localStorage.setItem("project", JSON.stringify(Projects.list));
 })
 
 const checklistBtn = document.querySelector("#checklist-button");  // checklist adder.
