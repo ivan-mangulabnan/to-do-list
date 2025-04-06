@@ -378,6 +378,12 @@ export class Dom {
         editMainDiv.classList.add("edit-main-div");
         form.appendChild(editMainDiv);
 
+        const id = document.createElement("input");
+        id.type = "hidden";
+        id.id = "ed-id";
+        id.value = targetTodo.id;
+        editMainDiv.appendChild(id);
+
         function createSection(editMainDiv, propertyName, propertyValue) {
             const div = document.createElement("div");
             div.classList.add("edit-section-div");
@@ -401,7 +407,7 @@ export class Dom {
                     item.id = "ed-priority";
                 }
                 if (propertyName === "project") {
-                    item.id = "ed project";
+                    item.id = "ed-project";
                     div.classList.add("edit-project");
                     const addbtn = FormDom.addButton(div);
                     addbtn.classList.add("edit-add-proj");
@@ -509,7 +515,7 @@ export class Dom {
         const approveBtn = document.createElement("button");
         approveBtn.classList.add("edit-aprv-btn");
         approveBtn.textContent = "✔";
-        approveBtn.type = "submit";
+        approveBtn.type = "button";
         const cancelBtn = document.createElement("button");
         cancelBtn.classList.add("edit-rmv-btn");
         cancelBtn.textContent = "✖";
@@ -518,6 +524,54 @@ export class Dom {
         editMainDiv.appendChild(btnDiv);
 
         dialog.showModal();
+
+    }
+
+    static updateTodo(targetID) {
+        const todo = Todos.list.find(item => item.id === targetID);
+
+        const project = document.querySelector("#ed-project");
+        todo.project = project.value;
+
+        const title = document.querySelector("#ed-title");
+        todo.title = title.value;
+
+        const description = document.querySelector("#ed-description");
+        todo.description = description.value;
+
+        const dueDate = document.querySelector("#ed-dueDate");
+        todo.dueDate = dueDate.value;
+
+        const priority = document.querySelector("#ed-priority");
+        todo.priority = priority.value;
+
+        const notes = document.querySelector("#ed-notes");
+        todo.notes = notes.value;
+
+        const checklistArr = Array.from(document.querySelectorAll(".checklist-single-div"));
+        if (checklistArr.length === 0) {
+            todo.checklist = null;
+        } else {
+            let arrContainer = [];
+            checklistArr.forEach(container => {
+                const stats = container.querySelector('input[type="checkbox"]');
+                const status = stats.checked;
+                const text = container.querySelector('input[type="text"]').value;
+                const quantity = container.querySelector('input[type="number"]').value;
+                if (!Validation.notEmpty(text)) return;
+                arrContainer.push({text, quantity, status});
+            })
+
+            if (arrContainer.length === 0) {
+                todo.checklist = null;
+            } else {
+                todo.checklist = arrContainer;
+            }
+        }
+
+        const completionStatus = document.querySelector("#ed-complete");
+        todo.completionStatus = completionStatus.checked;
+
 
     }
 
