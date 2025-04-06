@@ -439,7 +439,7 @@ export class Dom {
                 item.value = propertyValue;
                 itemDiv.appendChild(item);
 
-            } else if (propertyName === "checklist") { 
+            } else if (propertyName === "checklist") {
                 div.classList.add("edit-checklist");
                 const plus = FormDom.addButton(div);
                 plus.classList.add("checklist-plus");
@@ -463,9 +463,11 @@ export class Dom {
                 const checkDiv = document.createElement("div");
                 checkDiv.classList.add("checklist-chkdiv");
 
-                propertyValue.forEach(checklist => {
-                    FormDom.utilChecklist(checkDiv, checklist.status, checklist.text, checklist.quantity);
-                })
+                if (propertyValue !== null) {
+                    propertyValue.forEach(checklist => {
+                        FormDom.utilChecklist(checkDiv, checklist.status, checklist.text, checklist.quantity);
+                    })
+                }
 
                 itemInnerDiv.append(entityDiv, checkDiv);
                 itemDiv.appendChild(itemInnerDiv);
@@ -592,6 +594,7 @@ export class Dom {
     static closeForm() {
         const form = document.querySelector("#task-form");
         const dialog = document.querySelector("#form-dialog");
+        Dom.hideProjectAdder();
         form.reset();
         FormDom.clearChecklist();
         dialog.close();
