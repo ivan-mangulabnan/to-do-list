@@ -629,6 +629,7 @@ export class FormDom extends Dom {
        }
 
        Projects.add(input.value);
+       localStorage.setItem("project", JSON.stringify(Projects.list));
        super.hideProjectAdder();
        super.loadFormOptions();
 
@@ -730,6 +731,41 @@ export class FormDom extends Dom {
         mainContainer.append(inputContainer, btnContainer);
         parentElement.appendChild(mainContainer);
         return mainContainer;
+    }
+
+    static createDialogForProject(h3) {
+        const dialog = document.createElement("dialog");
+        dialog.classList.add("project-dialog");
+
+        const form = document.createElement("form");
+        dialog.appendChild(form);
+
+        const container = document.createElement("div");
+        const label = document.createElement("label");
+        label.htmlFor = "up-project";
+        label.textContent = "EDIT PROJECT";
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = h3;
+
+        const btnDiv = document.createElement("div");
+        const approve = document.createElement("button");
+        approve.classList.add("up-btn");
+        const cancel = document.createElement("button");
+        cancel.classList.add("x-btn");
+        approve.type = "button";
+        approve.textContent = "✔";
+        cancel.type = "button";
+        cancel.textContent = "✖";
+
+        btnDiv.append(approve, cancel);
+        container.append(label, input);
+
+        form.append(container, btnDiv);
+        dialog.appendChild(form);
+        document.body.appendChild(dialog);
+        dialog.showModal();
     }
 }
 
