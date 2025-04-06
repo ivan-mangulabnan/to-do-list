@@ -733,3 +733,68 @@ button:hover {
     font-weight: bold;
     font-size: 1.3rem;
 }
+
+.project-dialog {
+    width: 700px;
+    top: 25%;
+    left: 34%;
+    height: 300px;
+    border-radius: 1rem;
+    border: 2px solid var(--color-borders);
+    outline: none;
+    padding: 1rem;
+}
+
+.project-dialog > form {
+    background-color: #F5F7FA;
+    height: 100%;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.project-dialog div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.project-dialog label {
+    font-size: 1.5rem;
+    font-weight: 1000;
+    letter-spacing: .1rem;
+    padding-left: 1rem;
+}
+
+.project-dialog input {
+    font-size: 2rem;
+    border: 1px solid var(--color-borders);
+    outline: none;
+    padding: .5rem 1rem;
+    border-radius: 2rem;
+}
+
+.project-dialog button {
+    font-size: 3rem;
+    border: none;
+    background: transparent;
+}
+
+.project-dialog button:first-of-type {
+    color: var(--color-complete);
+}
+
+.project-dialog button:last-of-type {
+    color: var(--color-primary-red);
+}
+
+.project-dialog div:last-of-type {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+}
