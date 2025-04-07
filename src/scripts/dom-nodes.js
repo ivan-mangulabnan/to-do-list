@@ -331,7 +331,6 @@ export class Dom {
 
     static displayTodo() {
 
-        console.log(Todos.list);
         Todos.list.forEach(todo => {
             const div = Dom.contentDiv.querySelector(`[data-project="${todo.project}"]`);
 
