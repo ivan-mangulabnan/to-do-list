@@ -20,10 +20,10 @@ export class Dom {
         Dom.contentDiv.innerHTML = "";
         Dom.contentDiv.classList.remove("no-task");
 
-        Todos.getProjectsWithTodo().forEach(title => {
+        Todos.list.forEach(title => {
             const div = document.createElement("div");
             div.classList.add("project-div");
-            div.setAttribute("data-project", `${title}`);
+            div.setAttribute("data-project", `${title.project}`);
             const innverDiv = document.createElement("div");
             innverDiv.classList.toggle("flex");
             innverDiv.classList.toggle("gap");
@@ -35,7 +35,7 @@ export class Dom {
             editBtn.classList.toggle("project-edit-btn");
             const delBtn = document.createElement("button");
             delBtn.classList.toggle("delBtn");
-            h3.textContent = title;
+            h3.textContent = title.project;
             h3.classList.add("project-name");
 
             const innerdiv2 = document.createElement("div");
@@ -49,14 +49,14 @@ export class Dom {
     }
 
     static initialize() {
-        const homeButton = document.querySelector("#home-link");
-        homeButton.click(); //sets the initialization with design.
+        Dom.contentDiv.innerHTML = "";
 
         Nav.showProjects();
 
         if (Todos.isEmpty() === true) {
             Dom.noTask();
         } else {
+            Dom.contentDiv.innerHTML = "";
             Dom.displayAllProjectWithTodos();
             Dom.displayTodo();
         }
@@ -331,6 +331,7 @@ export class Dom {
 
     static displayTodo() {
 
+        console.log(Todos.list);
         Todos.list.forEach(todo => {
             const div = Dom.contentDiv.querySelector(`[data-project="${todo.project}"]`);
 
@@ -346,6 +347,11 @@ export class Dom {
             title.textContent = todo.title;
             title.classList.add("todoTitle");
             const buttonsDiv = document.createElement("div");
+            const input = document.createElement("input");
+            input.type = "checkbox";
+            input.checked = todo.completionStatus;
+            if (input.checked) input.classList.add("check");
+            input.disabled = true;
             buttonsDiv.classList.add("buttonsDiv");
             const editButton = document.createElement("button");
             editButton.classList.add("editButton");
@@ -354,7 +360,7 @@ export class Dom {
             delButton.classList.add("delButton");
             delButton.classList.add("remove-button");
 
-            buttonsDiv.append(editButton, delButton);
+            buttonsDiv.append(input, editButton, delButton);
             todoDiv.append(colorDiv, title, buttonsDiv);
             allTodosDiv.appendChild(todoDiv);
         })
@@ -615,6 +621,26 @@ export class Dom {
         projectAdderBtn.classList.remove("minus-button");
         newProjectDiv.classList.remove("flex");
     }
+
+    static showWarning() {
+        const dialog = document.createElement("dialog");
+        dialog.classList.add("warning-dialog");
+        const container = document.createElement("div");
+        const warningContainer = document.createElement("div");
+        const warningLogo = document.createElement("p");
+        warningLogo.textContent = "!";
+        const warning = document.createElement("p");
+        warning.textContent = "You can only delete an empty project.";
+        const btn = document.createElement("button");
+        btn.textContent = "OK";
+        btn.classList.add("warning-ok");
+        
+        warningContainer.append(warningLogo, warning);
+        container.append(warningContainer, btn);
+        dialog.appendChild(container);
+        document.body.appendChild(dialog);
+        dialog.showModal();
+    }
 }
 
 export class FormDom extends Dom {
@@ -748,8 +774,10 @@ export class FormDom extends Dom {
         const input = document.createElement("input");
         input.type = "text";
         input.value = h3;
+        input.id = "up-project";
 
         const btnDiv = document.createElement("div");
+        btnDiv.setAttribute("data-name", h3);
         const approve = document.createElement("button");
         approve.classList.add("up-btn");
         const cancel = document.createElement("button");
@@ -766,6 +794,16 @@ export class FormDom extends Dom {
         dialog.appendChild(form);
         document.body.appendChild(dialog);
         dialog.showModal();
+    }
+
+    static editProject(input, data) {
+        const targetIndex = Projects.list.findIndex(name => name === data);
+        Projects.list[targetIndex] = input;
+
+        Todos.list.filter(todo => todo.project === data).map(todo => todo.project = input);
+
+        localStorage.setItem("list", JSON.stringify(Todos.list));
+        localStorage.setItem("project", JSON.stringify(Projects.list));
     }
 }
 
