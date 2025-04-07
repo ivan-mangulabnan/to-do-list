@@ -1,8 +1,10 @@
 import { Form } from "./form.js";
+import { Projects } from "./projects.js";
 import { Todos } from "./todos.js";
 
 export function saveTodo() {
     const input =  Form.input;
     Todos.list.push(new Todos(input));
     Todos.archive.push(new Todos(input));
+    localStorage.setItem("list", JSON.stringify(Todos.list));
 }
