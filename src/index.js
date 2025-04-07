@@ -1,5 +1,5 @@
 import "./index.css";
-import { Dom, FormDom, Nav } from "./scripts/dom-nodes.js";
+import { Dom, FormDom, Nav} from "./scripts/dom-nodes.js"
 import { saveTodo } from "./scripts/create-todo.js";
 import { Validation } from "./scripts/validation.js";
 import { Projects } from "./scripts/projects.js";
