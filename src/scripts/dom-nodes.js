@@ -2,7 +2,7 @@ import { Todos } from "./todos.js";
 import { Projects } from "./projects.js";
 import { Priority } from "./priority.js";
 import { Validation } from "./validation.js";
-import * as dateFns from "date-fns";
+import { format }  from "date-fns";
 
 export class Dom {
     
@@ -135,7 +135,7 @@ export class Dom {
                 datePWrapper.classList.add("todo-content-wrapper");
 
                 const dateP = document.createElement("p");
-                dateP.textContent = dateFns.format(todo.dueDate, "MMMM d, yyyy");
+                dateP.textContent = format(todo.dueDate, "MMMM d, yyyy");
                 dateP.classList.add("todo-content-item");
                 
                 datePWrapper.appendChild(dateP);
