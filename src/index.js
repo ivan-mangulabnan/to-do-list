@@ -8,6 +8,10 @@ import { Todos } from "./scripts/todos.js";
 document.addEventListener("DOMContentLoaded", event => { // initialze the page.
     const savedItems = JSON.parse(localStorage.getItem("list"));
     if (savedItems !== null) savedItems.forEach(todo => Todos.list.push(new Todos(todo)));
+    const savedProj = JSON.parse(localStorage.getItem("project"));
+    if (savedProj !== null) savedProj.forEach(project => Projects.add(project));
+    const homeButton = document.querySelector("#home-link");
+    homeButton.closest("div").classList.add("nav-location");
     Dom.initialize();
 })
 
@@ -51,7 +55,7 @@ projectAdderBtn.addEventListener("click", event => {
 const newProjBtn = document.querySelector(".new-proj-btn"); // project adder
 newProjBtn.addEventListener("click", event => {
     FormDom.addProject();
-    // localStorage.setItem("project", JSON.stringify(Projects.list));
+    Dom.initialize();
 })
 
 const checklistBtn = document.querySelector("#checklist-button");  // checklist adder.
@@ -68,7 +72,9 @@ nav.addEventListener("click", event => {
 })
 
 const homeButton = document.querySelector("#home-link"); // Home Display.
-homeButton.addEventListener("click", Dom.initialize);
+homeButton.addEventListener("click", event => {
+    Dom.initialize();
+});
 
 const navProjectDiv = document.querySelector("#nav-projects"); // Project Navs
 navProjectDiv.addEventListener("click", event => {
@@ -104,11 +110,15 @@ document.addEventListener("click", event => { // Show Add Project in Edit
     }
 })
 
-document.addEventListener("keyup", event => { // Escape key
+document.addEventListener("keydown", event => { // Escape key
     if (event.key === "Escape") {
         const editDialog = document.querySelector(".edit-dialog");
-        if (editDialog === null) return
-        editDialog.remove();
+        const projectDialog = document.querySelector(".project-dialog");
+        const warningDialog = document.querySelector(".warning-dialog");
+
+        if (editDialog !== null ) editDialog.remove();
+        if (projectDialog !== null) projectDialog.remove();
+        if (warningDialog !== null) warningDialog.remove();
     }
 })
 
@@ -125,6 +135,7 @@ document.addEventListener("click", event => {
         }
 
         Projects.add(input.value);
+        localStorage.setItem("project", JSON.stringify(Projects.list));
         select.innerHTML = "";
         Projects.list.forEach(project => {
             const opt = document.createElement("option");
@@ -152,11 +163,12 @@ document.addEventListener("click", event => {
         editDialog.remove();
     }
 
-    if (event.target.matches(".edit-aprv-btn")) { // whole dialog remove.
+    if (event.target.matches(".edit-aprv-btn")) { // update Todo.
         const id = document.querySelector("#ed-id").value;
         const editDialog = document.querySelector(".edit-dialog");
 
         Dom.updateTodo(id);
+        localStorage.setItem("list", JSON.stringify(Todos.list));
         Dom.initialize();
         editDialog.remove();
     }
@@ -165,6 +177,53 @@ document.addEventListener("click", event => {
         const id = event.target.closest("[data-id]").getAttribute("data-id");
         const todo = Todos.list.findIndex(todo => todo.id);
         Todos.list.splice(todo, 1);
+        localStorage.setItem("list", JSON.stringify(Todos.list));
         Dom.initialize();
+    }
+
+    if (event.target.matches(".project-edit-btn")) { // Project editor shower.
+        const parentDiv = event.target.closest(".projectTitleDiv") || event.target.closest(".project-innerdiv-first");
+        const textContent = parentDiv.querySelector("h3").textContent;
+        FormDom.createDialogForProject(textContent);
+    }
+
+    if (event.target.matches(".up-btn")) { // Project editor.
+        const input = event.target.closest("form").querySelector("input");
+        const data = event.target.closest("div").getAttribute("data-name");
+
+        if (!Validation.notEmpty(input.value)) {
+            input.setCustomValidity("This can't be left empty.");
+            input.reportValidity();
+            return
+        }
+
+        FormDom.editProject(input.value, data);
+        Dom.initialize();
+        event.target.closest("dialog").remove();
+    }
+
+    if (event.target.matches(".x-btn")) { // removes dialog upon closure.
+        event.target.closest("dialog").remove();
+    }
+
+    if (event.target.matches(".delBtn")) { // removes project.
+        const parentDiv = event.target.closest(".projectTitleDiv") || event.target.closest(".project-innerdiv-first");
+        const textContent = parentDiv.querySelector("h3").textContent;
+
+        const todoArr = Todos.list.filter(todo => todo.project === textContent);
+
+        if (todoArr.length !== 0) {
+            Dom.showWarning();
+            return
+        }
+
+        const target = Projects.list.findIndex(name => name === textContent);
+        Projects.list.splice(target, 1);
+        localStorage.setItem("project", JSON.stringify(Projects.list));
+        Dom.initialize();
+    }
+
+    if (event.target.matches(".warning-ok")) {
+        event.target.closest("dialog").remove();
     }
 })
